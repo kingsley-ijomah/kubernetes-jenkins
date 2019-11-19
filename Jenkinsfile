@@ -1,32 +1,36 @@
 pipeline {
-    agent any
     environment {
-        DOCKER_IMAGE_NAME = "kingsleyijomah/kubernetes"
+    registry = "kingsleyijomah/kubernetes:app"
+    // appImageTag = "app:${env.BUILD_NUMBER}"
+    // appImageTag = ":app"
+    registryCredential = 'dockerhub'
+  }
+
+  agent any
+  
+  stages {
+    stage('Building and tag image') {
+      steps{
+        sh 'docker build -t ' + registry .
+      }
     }
-    stages {
-        stage('Build Docker Image') {
-            steps {
-                script {
-                    app = docker.build(DOCKER_IMAGE_NAME)
-                }
-            }
+
+    stage('Push Images to Registry') {
+        steps{
+        script {
+          docker.withRegistry( '', registryCredential ) {
+            sh 'docker push ' + registry
+          }
         }
-        stage('Push Docker Image') {
-            steps {
-                script {
-                    docker.withRegistry('https://registry.hub.docker.com', 'docker_hub_login') {
-                        app.push("${env.BUILD_NUMBER}")
-                        app.push("latest")
-                    }
-                }
-            }
-        }
-        stage('DeployToProduction') {
-            steps {
-                input 'Deploy to Production?'
-                milestone(1)
-                //implement Kubernetes deployment here
-            }
+      }
+    }
+
+    stage('DeployToProduction') {
+        steps {
+            input 'Deploy to Production?'
+            milestone(1)
+            //implement Kubernetes deployment here
         }
     }
+  }
 }
