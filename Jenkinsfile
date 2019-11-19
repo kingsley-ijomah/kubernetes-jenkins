@@ -1,5 +1,8 @@
 pipeline {
-    agent any
+    agent {
+        label 'docker'
+    }
+    
     environment {
         DOCKER_IMAGE_NAME = "kingsleyijomah/kubernetes"
     }
