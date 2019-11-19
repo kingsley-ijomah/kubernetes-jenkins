@@ -9,21 +9,21 @@ pipeline {
   agent any
   
     stages {
-        stage('Building and tag image') {
-          steps{
-            sh 'docker build -t ' + registry + ' .'
-          }
-        }
+        // stage('Building and tag image') {
+        //     steps{
+        //         sh 'docker build -t ' + registry + ' .'
+        //     }
+        // }
 
-        stage('Push Images to Registry') {
-            steps{
-                script {
-                    docker.withRegistry( '', registryCredential ) {
-                        sh 'docker push ' + registry
-                    }
-                }
-            }
-        }
+        // stage('Push Images to Registry') {
+        //     steps{
+        //         script {
+        //             docker.withRegistry( '', registryCredential ) {
+        //                 sh 'docker push ' + registry
+        //             }
+        //         }
+        //     }
+        // }
 
         stage('DeployToProduction') {
             steps {
