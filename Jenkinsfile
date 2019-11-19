@@ -11,7 +11,7 @@ pipeline {
     stages {
         stage('Building and tag image') {
           steps{
-            sh 'docker build -t ' + registry + '.'
+            sh 'docker build -t ' + registry + ' .'
           }
         }
 
