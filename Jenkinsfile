@@ -1,26 +1,16 @@
 pipeline {
-    agent {
-        label 'docker'
-    }
-
+    agent any
     environment {
         DOCKER_IMAGE_NAME = "kingsleyijomah/kubernetes"
     }
     stages {
-        stage('Docker node test') {
-            agent {
-                docker {
-                    // Set both label and image
-                    label 'docker'
-                    image 'node:7-alpine'
-                    args '--name docker-node' // list any args
-                }
-            }
-          steps {
-                // Steps run in node:7-alpine docker container on docker slave
-                sh 'node --version'
-          }
-        }
+        // stage('Build') {
+        //     steps {
+        //         echo 'Running build automation'
+        //         sh './gradlew build --no-daemon'
+        //         archiveArtifacts artifacts: 'dist/onlineShop.zip'
+        //     }
+        // }
         stage('Build Docker Image') {
             steps {
                 script {
