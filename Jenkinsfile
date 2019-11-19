@@ -30,6 +30,9 @@ pipeline {
                 input 'Deploy to Production?'
                 milestone(1)
                 //implement Kubernetes deployment here
+                KubernetesDeploy(
+                    configs: 'deployment-kube.yaml'    
+               )
             }
         }
     }
