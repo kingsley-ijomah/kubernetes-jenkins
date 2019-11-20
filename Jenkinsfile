@@ -32,7 +32,7 @@ pipeline {
                 //implement Kubernetes deployment here
                 kubernetesDeploy(
                     kubeconfigId: 'kubeconfig',
-                    configs: 'deployment-kube.yaml',
+                    configs: 'deployment-kube.yml',
                     enableConfigSubstitution: true
                )
             }
