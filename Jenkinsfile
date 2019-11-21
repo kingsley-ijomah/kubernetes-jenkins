@@ -3,7 +3,7 @@ pipeline {
         registry = "kingsleyijomah/kubernetes:app"
         // appImageTag = "app:${env.BUILD_NUMBER}"
         // appImageTag = ":app"
-        registryCredential = 'dockerhub'
+        registryCredential = 'docker_hub_login'
     }
 
   agent any
