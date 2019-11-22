@@ -3,7 +3,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: app
-  annotations:
+  namespace: prod
   labels:
     io.kompose.service: app
 spec:
@@ -22,7 +22,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: app
-  annotations:
+  namespace: prod
   labels:
     io.kompose.service: app
 spec:
